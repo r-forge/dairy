@@ -1,0 +1,13 @@
+citHeader("To cite package 'dairy' in publications use 34:")
+desc <- packageDescription("dairy")
+year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", desc$Date)
+vers <- paste("R package version", desc$Version)
+citEntry(entry="Manual",
+	title = "R package dairy: Functions and models related to dairy production",
+	author = personList(as.person("Lars Relund Nielsen"),
+		as.person("Erik Jørgensen")),
+	year = year,
+	note = vers,
+	textVersion = paste("Lars Relund and Erik Jørgensen (", year,
+		"). R package dairy: Functions and models related to dairy production. ", vers, sep="")
+)

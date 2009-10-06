@@ -1,0 +1,11 @@
+Package: dairy
+Type: Package
+Title: Functions and models related to dairy production
+Version: 0.8
+Date: 2009-05-15
+Author: Lars Relund Nielsen and Erik Jørgensen
+Maintainer: Lars Relund Nielsen <lars@relund.dk>
+Depends: R (>= 2.8.0), R.oo, lattice, dlm, mvtnorm, MDP, RODBC, Matrix, plyr
+Description: Functions and models related to dairy production
+License: LGPL (>= 2.1)
+Encoding: latin1

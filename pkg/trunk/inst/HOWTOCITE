@@ -1,0 +1,11 @@
+  Lars Relund and Erik Jørgensen (2009). R package dairy: Functions and
+  models related to dairy production. R package version 0.8
+
+A BibTeX entry for LaTeX users is 
+
+  @Manual{,
+	title = {R package dairy: Functions and models related to dairy production},
+	author = {Lars Relund Nielsen and Erik Jørgensen},
+	year = {2009},
+	note = {R package version 0.8},
+  }
