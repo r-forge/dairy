@@ -3,7 +3,7 @@
 
 #include <cmath>
 using namespace std;
-//#include "Rdefines.h"
+#include "Rdefines.h"
 //#include "basicdt.hh"
 typedef double flt;                 ///< A floating number datatype.
 //-----------------------------------------------------------------------------

@@ -9,22 +9,22 @@
 			<Target title="Debug">
 				<Option output="bin\Debug\dairy" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj\Debug\" />
-				<Option type="1" />
+				<Option type="3" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-g" />
+					<Add directory="C:\tools\R\R-2.10.0\include" />
 				</Compiler>
 				<Linker>
-					<Add library="C:\Programmer\R\R-2.9.1\bin\Rlapack.dll" />
-					<Add library="C:\Programmer\R\R-2.9.1\bin\R.dll" />
+					<Add library="C:\tools\R\R-2.10.0\bin\Rlapack.dll" />
+					<Add library="C:\tools\R\R-2.10.0\bin\R.dll" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add directory="C:\Programmer\R\R-2.9.1\include" />
 		</Compiler>
-		<Unit filename="main.cc" />
 		<Unit filename="..\src\basicdt.hh" />
 		<Unit filename="..\src\bodyweight.cc" />
 		<Unit filename="..\src\bodyweight.hh" />
