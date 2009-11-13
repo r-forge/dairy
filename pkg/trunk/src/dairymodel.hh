@@ -336,7 +336,7 @@ private:
 	 * @return The dry week.
 	 */
     int GetDryWeek(int idxDry) {
-		return Dfc2DryWeek(insemStart+pregTestLth)+idxDry;
+		return firstDryWeek+idxDry;
 	}
 
 	/**
@@ -402,7 +402,7 @@ private:
      * @return Index of Dry week number.
      */
     int Dfc2DryWeekIdx(int dfc) {
-		return Dfc2DryWeek(dfc)-GetMinDryWeek(dfc);
+		return Dfc2DryWeek(dfc)-firstDryWeek;
 	}
 
     /**
@@ -469,6 +469,7 @@ private:
     uSInt maxDfc;             ///< Max dfc.
     flt priceHeifer;
     uSInt sizeDry;
+    uSInt firstDryWeek;       ///< First week where possible to dry.
     uSInt sizeM;
     uSInt sizeA;
     uSInt dryPeriodLth;

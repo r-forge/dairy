@@ -68,7 +68,7 @@ BodyWeight::BodyWeight(flt udvegt, flt gompM, flt gompN,
 // ---------------------------------------------------------------------------
 
 flt BodyWeight::GetBCS(int dfc, int con) {
-    Rprintf("BCS: dfc:%d, con:%d\n",dfc,con);
+    //Rprintf("BCS: dfc:%d, con:%d\n",dfc,con);
     flt TT = T;
     flt a,b,c;
     if (con>=TT) {
@@ -108,12 +108,12 @@ flt BodyWeight::feedingSFU(int lac, int dfc, int con, flt milk, int gest) {
     flt age = CowAge(lac);
     flt eFetusW = 0;
     if (dfc>con) eFetusW = this->energyFetus(GetFetusW(con+gest-dfc));
-    Rprintf("main:%f bcs:%f bwg:%f fetus:%f milk:%f\n",
+    /*Rprintf("main:%f bcs:%f bwg:%f fetus:%f milk:%f\n",
         energyMain(GetBWStd(age+dfc)),
         energyBCS(DeltaKgBCSAge((int)age, dfc, con), GetBCS(dfc,con)),
         energyBWG(GetBWStd(age+dfc+1)-GetBWStd(age+dfc)),
         eFetusW,
-        energyMilk(milk));
+        energyMilk(milk));*/
     return
         energyMain(GetBWStd(age+dfc)) +
         energyBCS(DeltaKgBCSAge((int)age, dfc, con), GetBCS(dfc,con)) +

@@ -94,6 +94,7 @@ DairyModelDaily::DairyModelDaily(vector<string> binName,
     this->pregTestLth = pregTestLth;
     this->iAZero = iAZero;
 
+    firstDryWeek = Dfc2Week(insemStart+gestLth-dryPeriodLth);
     sizeDry = Dfc2Week(insemFinish+gestLth-dryPeriodLth)-Dfc2Week(insemStart+gestLth-dryPeriodLth)+2;	// size of sDry
 }
 
@@ -390,8 +391,7 @@ void DairyModelDaily::ReplaceAction(int & d1, int & d2, int & iDry,
 
     aScpIdx.clear();
     aScpIdx.push_back(0);
-    if (d2!=maxDfc) aScpIdx.push_back(vS1[d1+1]-1);
-    else aScpIdx.push_back(1);
+    aScpIdx.push_back(vS1[d1+1]-1);
 
     pr.clear();
     pr.push_back(1);
@@ -425,7 +425,7 @@ void DairyModelDaily::DryAction(int & d1, int & d2, int & iM, int & iDry,
         return;
     }
 
-    for (idx i=0;i<prM2A[iM].size();++i) {
+    for (idx i=0;i<prM2A[iM].size();++i) {  // add transpr from m to A
         if (i % 2 == 0) {  // even
             aScpIdx.push_back(0);
             aScpIdx.push_back((int)prM2A[iM][i]);
@@ -433,9 +433,11 @@ void DairyModelDaily::DryAction(int & d1, int & d2, int & iM, int & iDry,
         }
         pr.push_back(prM2A[iM][i]*(1-prICDry[d1]));
     }
-    aScpIdx.push_back(0);
-    if (d2!=maxDfc) aScpIdx.push_back(vS2[d2+1]-1);
-    else aScpIdx.push_back(1);
+    aScpIdx.push_back(0);   // add trans pr for IC
+    //if (d2!=maxDfc)
+    //if (d2==483) Rprintf("iDry=%d, iM=%d, s=%d\n ",iDry,iM,vS1[d1+1]-1);
+    aScpIdx.push_back(vS1[d1+1]-1);
+    //else aScpIdx.push_back(1);
     pr.push_back(prICDry[d1]);
 
     AddActionBinary(sId, aId, label, aScpIdx, pr, weights, fA, fALbl,
@@ -481,10 +483,12 @@ void DairyModelDaily::KeepAction(int & d1, int & d2, int & s2, int & iM, int & i
         }
         // if become pregnant
         int iDryW = Dfc2DryWeekIdx(dfc+1);
+        //if (dfc==273) Rprintf("iDryW=%d, iM=%d - ",iDryW,iM);
         for (idx i=0;i<prM[d1][d2][iM].size();++i) {
             if (i % 2 == 0) {  // even
                 aScpIdx.push_back(1);
                 aScpIdx.push_back(GetStateIdx(d2+1, (int)prM[d1][d2][iM][i], iDryW));
+                //if (dfc==273) Rprintf("sIdx=%d\n",GetStateIdx(d2+1, (int)prM[d1][d2][iM][i], iDryW));
                 continue;
             }
             pr.push_back(prM[d1][d2][iM][i]*prPT*(1-icPr));
