@@ -1,3 +1,39 @@
+###########################################################################/**
+# @RdocClass Discretize
+#
+# @title "Discretize class"
+#
+# \description{
+#  Containing all methods related to discritizing an uni/bi-variate normal distribution. Both uniform and nonuniform discretization possible.
+#  @classhierarchy
+# }
+#
+# @synopsis
+#
+# \arguments{
+#   \item{...}{Not used.}
+# }
+#
+# \section{Fields and Methods}{
+#  @allmethods ""
+# }
+#
+#
+# @examples "../RdocFiles/Discretize.Rex"
+#
+# \references{
+# [1] Nielsen, L.R.; Jørgensen, E. & Højsgaard, S. Embedding a state space model into a Markov decision process Dept. of Genetics and Biotechnology, Aarhus University, 2008. \cr
+# }
+#
+# @author
+#*/###########################################################################
+setConstructorS3("Discretize", function(...)
+{
+	extend(Object(), "Discretize"
+	)
+})
+
+
 #########################################################################/**
 # @RdocMethod .volCube
 #
@@ -536,44 +572,6 @@ setMethodS3("discretize2DNonunif", "Discretize", function(this, mu, sigma,
 	cat("Total KL = ",queue$KL,"\n")
 	return(cubes)
 })
-
-
-
-###########################################################################/**
-# @RdocClass Discretize
-#
-# @title "Discretize class"
-#
-# \description{
-#  Containing all methods related to discritizing an uni/bi-variate normal distribution. Both uniform and nonuniform discretization possible.
-#  @classhierarchy
-# }
-#
-# @synopsis
-#
-# \arguments{
-#   \item{...}{Not used.}
-# }
-#
-# \section{Fields and Methods}{
-#  @allmethods ""
-# }
-#
-#
-# @examples "../RdocFiles/Discretize.Rex"
-#
-# \references{
-# [1] Nielsen, L.R.; Jørgensen, E. & Højsgaard, S. Embedding a state space model into a Markov decision process Dept. of Genetics and Biotechnology, Aarhus University, 2008. \cr
-# }
-#
-# @author
-#*/###########################################################################
-setConstructorS3("Discretize", function(...)
-{
-	extend(Object(), "Discretize"
-	)
-})
-
 
 
 #########################################################################/**

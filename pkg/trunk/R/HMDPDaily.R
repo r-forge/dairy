@@ -1447,7 +1447,7 @@ setMethodS3("transPrDry", "HMDPDaily", function(this, lac, iM, ...) {
 #
 #*/#########################################################################
 setMethodS3("genBinaryR", "HMDPDaily", function(this, prefix="", saveCsv=FALSE, ...) {
-	idS<-matrix(NA,nrow=this$maxLac,ncol=this$stateVar$sizeM)      # idS[lac,j] = sId of state j-1 at dfc = 1 in lac (second level)
+	idS<-matrix(NA,nrow=this$maxLac,ncol=this$stateVar$sizeM+1)      # idS[lac,j] = sId of state j-1 at dfc = 1 in lac (second level)
 
 	icAction<-function(d1,d2) {
 		#cat("icAction:\n")
@@ -1545,8 +1545,9 @@ setMethodS3("genBinaryR", "HMDPDaily", function(this, prefix="", saveCsv=FALSE, 
 	}
 
 	# only called when d2 = 1 so can store id's in idS
-	createLev2Stage1<-function(d1,d2) {     # do the same as createLev2Stage except store idS
+	createLev2Stage1<-function(d1) {     # do the same as createLev2Stage except store idS
 		#cat("createLev2Stage1:\n")
+		d2 = 1
 		size1Next<-this$.getLev1States(d1+1)
 		size<-this$.getLev2States(d2)
 		sizeNext<-this$.getLev2States(d2+1)
@@ -1556,7 +1557,7 @@ setMethodS3("genBinaryR", "HMDPDaily", function(this, prefix="", saveCsv=FALSE, 
 				iM<-this$.getMIdx(s2)
 				iDry<-this$.getDryWeekIdx(d2, s2)
 				if (s2==size-1) lbl<-"Replaced due to IC" else lbl<-paste(iM,",",iDry,sep="")
-				if (s2<this$stateVar$sizeM) idS[d1,s2+1]<<-w$state(label=lbl) # save state id
+				idS[d1,s2+1]<<-w$state(label=lbl) # save state id
 					while (TRUE) {      # dummy loop so can use break
 						if (s2==size-1) {
 							icAction(d1,d2)    # last state (IC state)
@@ -1597,7 +1598,7 @@ setMethodS3("genBinaryR", "HMDPDaily", function(this, prefix="", saveCsv=FALSE, 
 								w$process()     # level 2
 									for (d2 in 0:this$maxDfc) {   # this$maxDfc
 										if (d2==0) createLev2DummyStage()
-										if (d2==1) createLev2Stage1(d1,d2)
+										if (d2==1) createLev2Stage1(d1)
 										if (d2>1) createLev2Stage(d1,d2)
 									}
 								w$endProcess()
