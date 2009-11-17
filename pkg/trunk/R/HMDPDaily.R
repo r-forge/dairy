@@ -1606,7 +1606,7 @@ setMethodS3("genBinaryR", "HMDPDaily", function(this, prefix="", saveCsv=FALSE, 
 							cat("\n")
 						} else {    # just make a hyperarc to stage 1 in the child process defined above (shared child process)
 							rew<-c(0,0,0)
-							prob<-c(3,idS[this$.mapM1ToM(this$stateVar$sA[s1+1,1])+1],1)
+							prob<-c(3,idS[d1,this$.mapM1ToM(this$stateVar$sA[s1+1,1])+1],1)
 							w$action(label="Dummy",rew,prob)
 							w$endAction()
 						}
