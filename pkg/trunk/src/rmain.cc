@@ -187,7 +187,9 @@ SEXP DAIRY_newDairyModelDaily(SEXP rBinNames,
             (*pPrPregT)[i][j] = p[0];
         }
     }
-    UNPROTECT(1);}
+    UNPROTECT(1);
+    //Rprintf("prPreg[1,75]=%f\n",(*pPrPregT)[1][75]);
+    }
 
     // assign yield (enclose to be sure)
     {SEXP dim;

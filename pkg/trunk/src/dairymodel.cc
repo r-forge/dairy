@@ -483,7 +483,7 @@ void DairyModelDaily::KeepAction(int & d1, int & d2, int & s2, int & iM, int & i
         }
         // if become pregnant
         int iDryW = Dfc2DryWeekIdx(dfc+1);
-        //if (dfc==273) Rprintf("iDryW=%d, iM=%d - ",iDryW,iM);
+        //if (dfc==74) Rprintf("iDryW=%d, iM=%d, prPT=%f\n",iDryW,iM,prPT);
         for (idx i=0;i<prM[d1][d2][iM].size();++i) {
             if (i % 2 == 0) {  // even
                 aScpIdx.push_back(1);

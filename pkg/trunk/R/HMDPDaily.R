@@ -2348,11 +2348,12 @@ setMethodS3("createObjectC", "HMDPDaily", function(this, prefix="", saveCsv=FALS
 			for (preg in 0:1)
 				prIC[[lac+1,dfc+1,preg+1]] <- this$probInvol(dfc,lac,(preg==1))
 
-	# calc array prPregT. pr of positive pregnancy test (prPreg[lac+1][dfc+1]).
+	# calc array prPregT. pr of positive pregnancy test (prPreg[lac+1][dfc+1] = pr preg in lac and dfc).
+	# note i C++ we have R array prPreg[[lac+1,dfc+1]] = prPreg[lac][dfc]
 	prPregT<-array(list(0),c(this$maxLac+1,this$maxDfc+1))
 	for (lac in 1:this$maxLac)
 		for (dfc in 1:(this$oOestus$insemFinish+this$oOestus$pregTestLth))
-			prPregT[[lac+1,dfc+1]] = this$oOestus$probPregTest(lac, dfc+1)
+			prPregT[[lac+1,dfc+1]] = this$oOestus$probPregTest(lac, dfc)
 
 	# calc vector vA2M which assign iA to iM (stored in vA2M[iA+1])
 	vA2M<-rep(-1,this$stateVar$sizeA)
