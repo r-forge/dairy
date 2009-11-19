@@ -376,6 +376,12 @@ private:
 		return (this->GetMaxDryWeekIdx(n) - this->GetMinDryWeekIdx(n) + 2)*sizeM + 1;
 	}
 
+	/** Return the probability of M (prM[lac][dfc][iM] is a vector with (idx, pr, idx, pr, ...))*/
+	flt GetPrM(int & lac, int & dfc, int & iM, int & i) {
+        if (lac>=(int)prM.size()) return prM[(int)prM.size()][dfc][iM][i];    // assume that prM equal for lac's higher
+        return prM[lac][dfc][iM][i];
+    }
+
     /**
      * Return week number given that we are at day dfc.
      * @param dfc Days from calving.

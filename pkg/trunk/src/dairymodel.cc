@@ -166,8 +166,8 @@ void DairyModelDaily::GenerateActionsBinary() {
                     sIdx.push_back(a1);
                     for (int d2=0; d2<=maxDfc; ++d2) {
                         sIdx.push_back(d2);
-                        //Rprintf("vS2[%d]:%d\n",d2,vS2[d2]);
                         for (int s2=0; s2<vS2[d2]; ++s2) {
+                            Rprintf("n1=%d, s1=%d, a1=%d, n2=%d, s2=%d\n",d1,s1,a1,d2,s2);
                             sIdx.push_back(s2);
                             AddLev2Actions(sId, sIdx, aId, label, aScpIdx, pr, weights, fA, fALbl, fTransP, fAWeight);
                             ++sId;
@@ -317,7 +317,6 @@ void DairyModelDaily::AddLev2Actions(const int & sId, const vector<int> & sIdx,
     int d1 = sIdx[3];
     int d2 = sIdx[6];
     int s2 = sIdx[7];
-    //Rprintf("lac:%d dfc:%d s2:%d ",d1,d2,s2);
     pr.clear(); aScpIdx.clear();
     label = "Dummy";
     weights.assign(3,0);
@@ -340,7 +339,7 @@ void DairyModelDaily::AddLev2Actions(const int & sId, const vector<int> & sIdx,
     //label = LabelS2(d2,s2,false);
     int iM = GetMIdx(s2);
     int iDry = GetDryWeekIdx(d2, s2);
-    //Rprintf("label:%s iM:%d iDry:%d ",label.c_str(),iM,iDry);
+    Rprintf("iM:%d iDry:%d \n",iM,iDry);
     if (d2==maxDfc) { // last stage
         if (iDry==sizeDry-1) {  // if not pregnant
             ReplaceAction(d1,d2,iDry,sId,aId,label,aScpIdx,pr,weights, fA, fALbl,
@@ -383,21 +382,26 @@ void DairyModelDaily::ReplaceAction(int & d1, int & d2, int & iDry,
     vector<int> & aScpIdx, vector<flt> & pr, vector<flt>& weights,
     ofstream & fA, ofstream & fALbl, ofstream & fTransP, ofstream & fAWeight)
 {
+    Rprintf("Replace\n");
     label = "Replace";
     weights[0] = 0;
     int con = GetDOC(iDry);
+    Rprintf("con=%d ",con);
     weights[1] = RewardCarcass(d1, d2, con);
+    Rprintf("w=%f ",weights[1]);
     weights[2] = 0;
 
     aScpIdx.clear();
     aScpIdx.push_back(0);
     aScpIdx.push_back(vS1[d1+1]-1);
+    Rprintf("idx=%d ",vS1[d1+1]-1);
 
     pr.clear();
     pr.push_back(1);
 
     AddActionBinary(sId, aId, label, aScpIdx, pr, weights, fA, fALbl,
             fTransP, fAWeight);
+    Rprintf("End Replace\n");
 }
 
 // ---------------------------------------------------------------------------
@@ -407,6 +411,7 @@ void DairyModelDaily::DryAction(int & d1, int & d2, int & iM, int & iDry,
     vector<int> & aScpIdx, vector<flt> & pr, vector<flt>& weights,
     ofstream & fA, ofstream & fALbl, ofstream & fTransP, ofstream & fAWeight)
 {
+    Rprintf("Dry\n");
     label = "Dry";
     weights[0] = dryPeriodLth;
     int con = GetDOC(iDry);
@@ -451,57 +456,58 @@ void DairyModelDaily::KeepAction(int & d1, int & d2, int & s2, int & iM, int & i
     vector<int> & aScpIdx, vector<flt> & pr, vector<flt>& weights,
     ofstream & fA, ofstream & fALbl, ofstream & fTransP, ofstream & fAWeight)
 {
-    //Rprintf("\nKeep Action\n");
+    Rprintf("Keep Action\n");
     label = "Keep";
     flt icPr;
     if (iDry==sizeDry-1) icPr = prIC[d1][d2][0];
     else icPr = prIC[d1][d2][1];    // pregnant
     int dfc = d2;
-    int lac = d1;
+    int lacM = d1;  // the lactation used when consider vectors prM and yield (since here assume that higher lac's have the same values)
+    if (d1>=(int)prM.size()) lacM = (int)prM.size()-1;
 
     weights[0] = 1;
     int con = GetDOC(iDry);
-    flt rewKeep = (1-icPr) * (yield[d1][d2][iM]*priceECM - priceSFU*oBW.feedingSFU(d1, d2, con, yield[d1][d2][iM], gestLth));
+    flt rewKeep = (1-icPr) * (yield[lacM][d2][iM]*priceECM - priceSFU*oBW.feedingSFU(d1, d2, con, yield[lacM][d2][iM], gestLth));
     flt rewRep = icPr * RewardCarcass(d1, d2, con);
     weights[1] =rewRep+rewKeep;
-    weights[2] = yield[d1][d2][iM];
-    //Rprintf("icPr:%f yield:%f sfu:%f\n",icPr,yield[d1][d2][iM],oBW.feedingSFU(d1, d2, con, yield[d1][d2][iM], gestLth));
+    weights[2] = yield[lacM][d2][iM];
+    //Rprintf("icPr:%f yield:%f sfu:%f\n",icPr,yield[lacM][d2][iM],oBW.feedingSFU(d1, d2, con, yield[lacM][d2][iM], gestLth));
 
     aScpIdx.clear(); pr.clear();
     if (iDry==sizeDry-1 & dfc<insemFinish+pregTestLth
         & dfc>=insemStart+pregTestLth-1)    // i.e. pregnancy unknown and possible to run preg test next day
     {
-        flt prPT = prPregT[lac][dfc+1];
+        flt prPT = prPregT[d1][dfc+1];
         // if continue open
-        for (idx i=0;i<prM[d1][d2][iM].size();++i) {
+        for (idx i=0;i<prM[lacM][d2][iM].size();++i) {
             if (i % 2 == 0) {  // even
                 aScpIdx.push_back(1);
-                aScpIdx.push_back(GetStateIdx(d2+1, (int)prM[d1][d2][iM][i], iDry));
+                aScpIdx.push_back(GetStateIdx(d2+1, (int)prM[lacM][d2][iM][i], iDry));
                 continue;
             }
-            pr.push_back(prM[d1][d2][iM][i]*(1-prPT)*(1-icPr));
+            pr.push_back(prM[lacM][d2][iM][i]*(1-prPT)*(1-icPr));
         }
         // if become pregnant
         int iDryW = Dfc2DryWeekIdx(dfc+1);
         //if (dfc==74) Rprintf("iDryW=%d, iM=%d, prPT=%f\n",iDryW,iM,prPT);
-        for (idx i=0;i<prM[d1][d2][iM].size();++i) {
+        for (idx i=0;i<prM[lacM][d2][iM].size();++i) {
             if (i % 2 == 0) {  // even
                 aScpIdx.push_back(1);
-                aScpIdx.push_back(GetStateIdx(d2+1, (int)prM[d1][d2][iM][i], iDryW));
-                //if (dfc==273) Rprintf("sIdx=%d\n",GetStateIdx(d2+1, (int)prM[d1][d2][iM][i], iDryW));
+                aScpIdx.push_back(GetStateIdx(d2+1, (int)prM[lacM][d2][iM][i], iDryW));
+                //if (dfc==273) Rprintf("sIdx=%d\n",GetStateIdx(d2+1, (int)prM[lacM][d2][iM][i], iDryW));
                 continue;
             }
-            pr.push_back(prM[d1][d2][iM][i]*prPT*(1-icPr));
+            pr.push_back(prM[lacM][d2][iM][i]*prPT*(1-icPr));
         }
     }
     else {  // already pregnant
-        for (idx i=0;i<prM[d1][d2][iM].size();++i) {
+        for (idx i=0;i<prM[lacM][d2][iM].size();++i) {
             if (i % 2 == 0) {  // even
                 aScpIdx.push_back(1);
-                aScpIdx.push_back(GetStateIdx(d2+1, (int)prM[d1][d2][iM][i], iDry));
+                aScpIdx.push_back(GetStateIdx(d2+1, (int)prM[lacM][d2][iM][i], iDry));
                 continue;
             }
-            pr.push_back(prM[d1][d2][iM][i]*(1-icPr));
+            pr.push_back(prM[lacM][d2][iM][i]*(1-icPr));
         }
     }
     aScpIdx.push_back(1);
