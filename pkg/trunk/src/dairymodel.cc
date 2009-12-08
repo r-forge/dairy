@@ -167,7 +167,7 @@ void DairyModelDaily::GenerateActionsBinary() {
                     for (int d2=0; d2<=maxDfc; ++d2) {
                         sIdx.push_back(d2);
                         for (int s2=0; s2<vS2[d2]; ++s2) {
-                            Rprintf("n1=%d, s1=%d, a1=%d, n2=%d, s2=%d\n",d1,s1,a1,d2,s2);
+                            //Rprintf("n1=%d, s1=%d, a1=%d, n2=%d, s2=%d\n",d1,s1,a1,d2,s2);
                             sIdx.push_back(s2);
                             AddLev2Actions(sId, sIdx, aId, label, aScpIdx, pr, weights, fA, fALbl, fTransP, fAWeight);
                             ++sId;
@@ -339,7 +339,7 @@ void DairyModelDaily::AddLev2Actions(const int & sId, const vector<int> & sIdx,
     //label = LabelS2(d2,s2,false);
     int iM = GetMIdx(s2);
     int iDry = GetDryWeekIdx(d2, s2);
-    Rprintf("iM:%d iDry:%d \n",iM,iDry);
+    //Rprintf("iM:%d iDry:%d \n",iM,iDry);
     if (d2==maxDfc) { // last stage
         if (iDry==sizeDry-1) {  // if not pregnant
             ReplaceAction(d1,d2,iDry,sId,aId,label,aScpIdx,pr,weights, fA, fALbl,
@@ -382,26 +382,26 @@ void DairyModelDaily::ReplaceAction(int & d1, int & d2, int & iDry,
     vector<int> & aScpIdx, vector<flt> & pr, vector<flt>& weights,
     ofstream & fA, ofstream & fALbl, ofstream & fTransP, ofstream & fAWeight)
 {
-    Rprintf("Replace\n");
+    //Rprintf("Replace\n");
     label = "Replace";
     weights[0] = 0;
     int con = GetDOC(iDry);
-    Rprintf("con=%d ",con);
+    //Rprintf("con=%d ",con);
     weights[1] = RewardCarcass(d1, d2, con);
-    Rprintf("w=%f ",weights[1]);
+    //Rprintf("w=%f ",weights[1]);
     weights[2] = 0;
 
     aScpIdx.clear();
     aScpIdx.push_back(0);
     aScpIdx.push_back(vS1[d1+1]-1);
-    Rprintf("idx=%d ",vS1[d1+1]-1);
+    //Rprintf("idx=%d ",vS1[d1+1]-1);
 
     pr.clear();
     pr.push_back(1);
 
     AddActionBinary(sId, aId, label, aScpIdx, pr, weights, fA, fALbl,
             fTransP, fAWeight);
-    Rprintf("End Replace\n");
+    //Rprintf("End Replace\n");
 }
 
 // ---------------------------------------------------------------------------
@@ -411,7 +411,7 @@ void DairyModelDaily::DryAction(int & d1, int & d2, int & iM, int & iDry,
     vector<int> & aScpIdx, vector<flt> & pr, vector<flt>& weights,
     ofstream & fA, ofstream & fALbl, ofstream & fTransP, ofstream & fAWeight)
 {
-    Rprintf("Dry\n");
+    //Rprintf("Dry\n");
     label = "Dry";
     weights[0] = dryPeriodLth;
     int con = GetDOC(iDry);
@@ -456,7 +456,7 @@ void DairyModelDaily::KeepAction(int & d1, int & d2, int & s2, int & iM, int & i
     vector<int> & aScpIdx, vector<flt> & pr, vector<flt>& weights,
     ofstream & fA, ofstream & fALbl, ofstream & fTransP, ofstream & fAWeight)
 {
-    Rprintf("Keep Action\n");
+    //Rprintf("Keep Action\n");
     label = "Keep";
     flt icPr;
     if (iDry==sizeDry-1) icPr = prIC[d1][d2][0];
