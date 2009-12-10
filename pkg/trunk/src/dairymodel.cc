@@ -35,7 +35,7 @@ void DairyModelDaily::GenerateStatesBinary() {
                             //Rprintf("  sIdx: %s - label: %s\n",VectorStr<int>(sIdx).c_str(),label.c_str());
                             if (d2==1) {
                                 sIdS2[d1][s2] = sId; // store id for shared child linking.
-                                //Rprintf("sIdS2,sId:%d\n",sId);
+                                Rprintf("d1:%d s2:%d sIdS2:%d\n",d1,s2,sId);
                             }
                             AddStateBinary(sId, label, sIdx, fS, fSLbl);
                             sIdx.pop_back();
@@ -118,7 +118,7 @@ void DairyModelDaily::SetVS2(intPtr p, int size) {
     //Rprintf("sizeM:%d\n",sizeM);
     // set size of sIdS2
     sIdS2.resize(maxLac+1);
-    for (int d1=0; d1<maxLac+1; ++d1) sIdS2[d1].resize(sizeM);
+    for (int d1=1; d1<maxLac+1; ++d1) sIdS2[d1].resize(sizeM);
     /*Rprintf("vS2: ");
     for (int i=0;i<vS2.size();++i) Rprintf("i,n = %d,%d,  ",i,vS2[i]);
     Rprintf("\n");*/
