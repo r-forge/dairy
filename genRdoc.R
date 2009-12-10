@@ -2,13 +2,17 @@
 library(R.oo)
 library(mvtnorm)
 library(lattice)
-doc<-Rdoc()
-f <- list.files("pkg/trunk/R",pattern="\\.[R]",full.names=TRUE)
-a <- lapply(f,source)
 setwd("./pkg/trunk/R")
+doc<-Rdoc()
+doc$setNameFormat("class.method")
+f <- list.files(".",pattern="\\.[R]",full.names=TRUE)
+a <- lapply(f,source)
 author <- "Lars Relund, \\url{http://www.research.relund.dk}"
-doc$compile(check=F)#, source=FALSE, check=TRUE, debug=TRUE,)
-#setwd("../..")
+auEJO <- "\\author{Erik Jørgensen, \\url{http://gbi.agrsci.dk/~ejo/}}"
+doc$compile(check=F, source=FALSE) #check=TRUE, debug=TRUE
+setwd("../../..")
 #system("gen_and_install_dairy.bat", wait = FALSE, show.output.on.console = FALSE, invisible = FALSE)
 #setwd("./dairy")
 #q()
+
+#doc$compile("Oestus.R")

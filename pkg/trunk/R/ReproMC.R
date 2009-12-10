@@ -58,7 +58,9 @@ setConstructorS3("ReproMC", function(gestLth=282, insemStart=35, insemFinish=250
 # LH-peak and Ovulation and finally, between start of CL-regression to Oestrogen peak. Approximated
 # a gamma-distribution by a sum of exponentially distributed substeps.
 # }
+#
 # @synopsis
+#
 # \arguments{
 #   \item{MeanDuration}{The mean length of the oestrous cycle}
 #   \item{VarDuration}{The variance of the length of the oestrous cycle}
@@ -67,19 +69,20 @@ setConstructorS3("ReproMC", function(gestLth=282, insemStart=35, insemFinish=250
 #   \item{CLRegOestroPeak}{Interval between start of CL-regressin and subsequent Oestrogen peak}
 #   \item{...}{Not used.}
 # }
+#
 # \value{
 #   \item{beta}{The mean length of each substep ( the shape parameter in the gamma-distribution of oestrous cycle length)}
 #   \item{scale}{The scale parameter in the gamma-distribution of oestrous cycle length. Corresponds to the
-#   number of substeps in the cycle. }
+#       number of substeps in the cycle. }
 #   \item{tider}{The length of each of the overall stages in the cycle}
 #   \item{Stepno}{The number of substeps in the cycle. Integer valued}
 #   \item{tider}{The length of each of the overall stages in the cycle}
 #   \item{rate}{The marix of transition intensities for the Marko Process}
-#     \item{kOestrousState}{The state number corresponding to the state where ovulation occurs}
-#     \item{kImplantationState}{The state number corresponding to the state where Implantation occurs (start of CL-regression)}
-#     \item{type}{type of object = 'Oestrous'}
+#   \item{kOestrousState}{The state number corresponding to the state where ovulation occurs}
+#   \item{kImplantationState}{The state number corresponding to the state where Implantation occurs (start of CL-regression)}
+#   \item{type}{type of object = 'Oestrous'}
 # }
-# \author Erik Jørgensen
+# @get "auEJO"
 #
 #*/##########################################################################################
 setMethodS3("reproMC1", "ReproMC", function(this, MeanDuration=21, VarDuration=2,
@@ -155,7 +158,7 @@ setMethodS3("reproMC1", "ReproMC", function(this, MeanDuration=21, VarDuration=2
 #   \item{kMatedState}{The state number corresponding to the first state in the mated subsets of states}
 #   \item{type}{type of object = 'MateOestrous'}
 # }
-# @author
+# @get "auEJO"
 #
 #*/##########################################################################################
 setMethodS3("reproMC2", "ReproMC", function(this, mod, pMate=0.85, pPreg=0.70, ...){
@@ -229,7 +232,7 @@ setMethodS3("reproMC2", "ReproMC", function(this, mod, pMate=0.85, pPreg=0.70, .
 #    \item{kMatedState}{The state number corresponding to the first state in the mated subsets of states}
 #      \item{type}{type of object = 'PregTestMateOestrous'}
 # }
-# @author
+# @get "auEJO"
 #
 #*/##########################################################################################
 setMethodS3("reproMC3", "ReproMC", function(this, mod, pMate=0.85, pPreg=0.70,
@@ -311,7 +314,7 @@ setMethodS3("reproMC3", "ReproMC", function(this, mod, pMate=0.85, pPreg=0.70,
 #   \item{margp}{A vector of marginal probabilities of positve pregnancy test for each day, i.e.,
 #            the conditional of a positive pregnancy test at day dfc, given no positive pregnancy before dfc}
 #   }
-# @author
+# @get "auEJO"
 #
 #*/##########################################################################################
 setMethodS3("daysToPregTest", "ReproMC", function(this, pMate = 0.45, pPreg = 0.50,
@@ -381,7 +384,7 @@ setMethodS3("daysToPregTest", "ReproMC", function(this, pMate = 0.45, pPreg = 0.
 # }
 # \value{ returns a vector of length (round(Interval/timestep)-1)
 #    with the probability of passage in time interval i}
-# @author
+# @get "auEJO"
 #
 #*/##########################################################################################
 setMethodS3("FirstPassageDist", "ReproMC", function(this, rate, prior, absorbstate,
@@ -426,14 +429,14 @@ setMethodS3("FirstPassageDist", "ReproMC", function(this, rate, prior, absorbsta
 # }
 #
 # \details{
-# The methods used for calculation of the matrix exponential is either
+# The methods used for calculation of the matrix exponential is either \itemize{
 #   \item{robust}{divides \code{t} into 2^n intervals and calculates expm(rate/(2^n))^(2^n)  }
 #   \item{Matrix}{current default. Uses the \code{expm} function in the \code{Matrix} package. Should be able to utilize the sparseness of the matrix.}
-# }
+# }}
 #
 # \value{Returns the transition matrix.}
 #
-# @author
+# @get "auEJO"
 #
 #*/##########################################################################################
 setMethodS3("calcTransMat", "ReproMC", function(this, Q, t=1, n=10, method='Matrix', ...){
@@ -451,7 +454,7 @@ setMethodS3("calcTransMat", "ReproMC", function(this, Q, t=1, n=10, method='Matr
 })
 
 
-##########################################################################################/*
+##########################################################################################
 # @RdocMethod .calcTransMatShort
 # @title "Calculates the transition matrix P(t) for a continuous Markov Process for a short time-interval t"
 # \description{
@@ -467,9 +470,9 @@ setMethodS3("calcTransMat", "ReproMC", function(this, Q, t=1, n=10, method='Matr
 #
 # \value{Returns the transition matrix.}
 #
-# @author
+# @get "auEJO"
 #
-#*/##########################################################################################
+###########################################################################################
 setMethodS3(".calcTransMatShort", "ReproMC", function(this, Q, t, ...){
 	# Optimalt set skal det være Overgangsmatricen for t
 	tmat <- 1-exp(-Q*t)
@@ -490,13 +493,13 @@ setMethodS3(".calcTransMatShort", "ReproMC", function(this, Q, t, ...){
 # @synopsis
 #\arguments{
 #   \item{x}{A vector of state numbers in (1,...,maxState) }
-#   \item{mu}{Vector of size 3 containing c(state where obvolution, state where CL regression start, state of oestrogen peak).
+#   \item{mu}{Vector of size 3 containing c(state where obvolution, state where CL regression start, state of oestrogen peak).}
 #   \item{alpha}{A parameter describing the shape of the level (2 = Gaussian dist/error function). }
 #   \item{p}{The relative level at the extreme stateno}
 #   \item{...}{Not used.}
 #}
 #\value{A vector of length Maxstate with the mean progesterone level for each state.}
-# @author
+# @get "auEJO"
 #
 #*/##########################################################################################
 setMethodS3("meanProgest", "ReproMC", function(this, x, mu=c(22,168,221), alpha=2, p=0.02, ...){
@@ -524,7 +527,7 @@ setMethodS3("meanProgest", "ReproMC", function(this, x, mu=c(22,168,221), alpha=
 #}
 #\value{Sequence of states starting with the initial state.}
 #
-# @author
+# @get "auEJO"
 #
 #*/##########################################################################################
 setMethodS3("simDisMC", "ReproMC", function(this, P, stages, initState=1, ...){
@@ -557,7 +560,7 @@ setMethodS3("simDisMC", "ReproMC", function(this, P, stages, initState=1, ...){
 #}
 #\value{A vector with posterior probabilities.}
 #
-# @author
+# @get "auEJO"
 #
 #*/##########################################################################################
 setMethodS3("posteriorMix", "ReproMC", function(this, obj, obs, ...){

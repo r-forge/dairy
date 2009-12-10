@@ -139,7 +139,7 @@ setMethodS3("prM", "HMDPDaily", function(this, lac, dfc, iM, ...){
 
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .covM
 #
 # @title "Calculate covariance matrices for (m_[t+1]|m_[t]) distribution"
@@ -346,7 +346,7 @@ setMethodS3("csvPrM", "HMDPDaily", function(this, fileName="prM.csv", ...) {
 #   dryoff is TRUE. In this case the length of the timestep  is \code{matingperiod[3]}
 # }
 #
-# \author{Erik Jørgensen.}
+# @get "auEJO"
 #
 # \seealso{
 #   @seeclass
@@ -377,7 +377,7 @@ setMethodS3("probInvol", "HMDPDaily", function(this, dfc, lac, preg=FALSE,
 })
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .mapMToM1
 #
 # @title "Find the interval m belongs to "
@@ -415,7 +415,7 @@ setMethodS3(".mapMToM1", "HMDPDaily", function(this, m, ...) {
 }, private=TRUE)
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .mapM1ToM
 #
 # @title "Given mean of A find the corresponding cube "
@@ -454,7 +454,7 @@ setMethodS3(".mapM1ToM", "HMDPDaily", function(this, a, ...) { # a: mean A value
 }, private=TRUE)
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .dfc2Week
 #
 # @title "Return week number given that we are at day dfc. "
@@ -484,7 +484,7 @@ setMethodS3(".dfc2Week", "HMDPDaily", function(this, dfc, ...) {
 }, private=TRUE)
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .week2Dfc
 #
 # @title "Return last day in week "
@@ -514,7 +514,7 @@ setMethodS3(".week2Dfc", "HMDPDaily", function(this, w, ...) {
 }, private=TRUE)
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .dfc2DryWeek
 #
 # @title "Return week number were dry given a positive preg test at day dfc "
@@ -544,7 +544,7 @@ setMethodS3(".dfc2DryWeek", "HMDPDaily", function(this, dfc, ...) {
 }, private=TRUE)
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .dfc2DryWeekIdx
 #
 # @title "Return the dry week index given a positive preg test at day dfc "
@@ -574,7 +574,7 @@ setMethodS3(".dfc2DryWeekIdx", "HMDPDaily", function(this, dfc, ...) {
 }, private=TRUE)
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .getMaxDryWeekIdx
 #
 # @title "Returns the index of the longest possible calving interval to be defined at this stage "
@@ -612,7 +612,7 @@ setMethodS3(".getMaxDryWeekIdx", "HMDPDaily", function(this, n, ...) {
 }, private=TRUE)
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .getMinDryWeekIdx
 #
 # @title "Returns the index of the shortest possible week where dry at this stage. Do not consider the unknown state. "
@@ -650,7 +650,7 @@ setMethodS3(".getMinDryWeekIdx", "HMDPDaily", function(this, n, ...) {
 }, private=TRUE)
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .getLev1States
 #
 # @title "Returns the number of states at a specified stage of the process at level 1 "
@@ -683,7 +683,7 @@ setMethodS3(".getLev1States", "HMDPDaily", function(this, n, ...) {
 }, private=TRUE)
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .getLev2States
 #
 # @title "Returns the number of states at a specified stage of a process at level 2 "
@@ -720,7 +720,7 @@ setMethodS3(".getLev2States", "HMDPDaily", function(this, n, ...) {
 }, private=TRUE)
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .getDryWeekIdx
 #
 # @title "Returns the index of the dry week "
@@ -760,7 +760,7 @@ setMethodS3(".getDryWeekIdx", "HMDPDaily", function(this, n, i, ...) {
 }, private=TRUE)
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .getDryWeek
 #
 # @title "Return dry week number "
@@ -791,7 +791,7 @@ setMethodS3(".getDryWeek", "HMDPDaily", function(this, iDry, ...) {
 }, private=TRUE)
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .getMIdx
 #
 # @title "Returns the index of the latent milk yield corresponding to a specified state at a given stage "
@@ -821,7 +821,7 @@ setMethodS3(".getMIdx", "HMDPDaily", function(this, i, ...) {
 }, private=TRUE)
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .getIdxM
 #
 # @title "Find the cube containing m. Values on borders are handled random "
@@ -861,7 +861,7 @@ setMethodS3(".getIdxM", "HMDPDaily", function(this, m, ...) { # m: mean of (A,X)
 }, private=TRUE)
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .getIdxA
 #
 # @title "Find the interval containing a. Values on borders are handled random  "
@@ -900,7 +900,7 @@ setMethodS3(".getIdxA", "HMDPDaily", function(this, a, ...) { # a: mean of A
 }, private=TRUE)
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .getDOC
 #
 # @title "Find the day of conception  "
@@ -935,7 +935,7 @@ setMethodS3(".getDOC", "HMDPDaily", function(this, iDry, ...) {
 }, private=TRUE)
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .getStateIdx
 #
 # @title "Get the index of a state in a stage at level 2  "
@@ -1799,7 +1799,7 @@ setMethodS3("genStates2SQLite", "HMDPDaily", function(this, dsnName="mdp_models"
 })
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .addStateCsvToDB
 #
 # @title "Save the states of the HMDP in a SQLite database table"
@@ -2069,7 +2069,7 @@ setMethodS3("genActions2SQLite", "HMDPDaily", function(this, dsnName="mdp_models
 
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .createActionTables
 #
 # @title "Create the action tables necessary to method genActions2SQLite"
@@ -2260,7 +2260,7 @@ setMethodS3("convertSQLite2Binary", "HMDPDaily", function(this, dsnName="mdp_mod
 })
 
 
-#########################################################################/*
+#########################################################################/**
 # @RdocMethod .deleteDairyModelDaily
 #
 # @title "Internal function. Remove the DairyModelDaily object from memory"
@@ -2286,18 +2286,20 @@ setMethodS3("convertSQLite2Binary", "HMDPDaily", function(this, dsnName="mdp_mod
 #
 #*/#########################################################################
 setMethodS3(".deleteDairyModelDaily", "HMDPDaily", function(this, p, ...) {
-	.Call("DAIRY_deleteDairyModelDaily", p);
+	cat(".deleteDairyModelDaily called.\n")
+	.Call("DAIRY_deleteDairyModelDaily", p)
+	cat(".deleteDairyModelDaily after.\n")
 	invisible()
 }, private=TRUE)
 
 
 #########################################################################/**
-# @RdocMethod createObjectC
+# @RdocMethod .createObjectC
 #
 # @title "Generate the binary files describing the HMDP model using C++ code"
 #
 # \description{
-#   @get "title"
+#   @get "title". Internal method use only if you know what you are doing.
 # }
 #
 # @synopsis
@@ -2318,17 +2320,22 @@ setMethodS3(".deleteDairyModelDaily", "HMDPDaily", function(this, p, ...) {
 # @examples "../RdocFiles/HMDPDaily.Rex"
 #
 #*/#########################################################################
-setMethodS3("createObjectC", "HMDPDaily", function(this, prefix="", saveCsv=FALSE, ...) {
+setMethodS3(".createObjectC", "HMDPDaily", function(this, prefix="", saveCsv=FALSE, ...) {
 	ptm <- proc.time()
 	# calc number of states
 	vS1<-rep(NA,this$maxLac+2)  # number of level 1 states (stage i stored in index i+1)
 	for (d1 in 0:(this$maxLac+1)) vS1[d1+1]<-this$.getLev1States(d1)
+	cat("Built matrix to store number of level 1 states.\n")
 	vS2<-rep(NA,this$maxDfc+1)  # number of level 2 states (stage i stored in index i+1)
 	for (d2 in 0:this$maxDfc) vS2[d2+1]<-this$.getLev2States(d2)
+	cat("Built matrix to store number of level 2 states.\n")
 	prICDry = rep(0,this$maxLac+1)  #IC pr in dry period (lac i stored in index i+1)
 	for (d1 in 1:this$maxLac) prICDry[d1+1] = this$probInvol(400,lac=d1,preg=TRUE,dryoff=TRUE)
+	cat("Built matrix to store probabilities for IC in dry period.\n")
 	if (is.null(this$.prM2A)) this$calcPrM2A(...)
+	cat("Built matrix to store probabilities for m to A.\n")
 	if (is.null(this$.prM)) this$calcPrM(...)
+	cat("Built matrix to store probabilities for m to m.\n")
 	if (saveCsv) this$csvPrM(...)
 	iAZero<-this$.getIdxA(0)
 
@@ -2340,6 +2347,7 @@ setMethodS3("createObjectC", "HMDPDaily", function(this, prefix="", saveCsv=FALS
 				m <- as.matrix(this$stateVar$sM[[iM+1]]$center)
 				yield[[lac+1,dfc+1,iM+1]] = this$oCowY$dailyYieldECM(m, lac, dfc)
 			}
+	cat("Built matrix to store yield given lac, dfc and m.\n")
 
 	# calc array prIC. IC pr given lac, dfc and preg (0 = not preg) is stored in prIC[lac+1][dfc+1][preg+1]
 	prIC<-array(list(0),c(this$maxLac+1,this$maxDfc+1,2))
@@ -2347,6 +2355,7 @@ setMethodS3("createObjectC", "HMDPDaily", function(this, prefix="", saveCsv=FALS
 		for (dfc in 1:this$maxDfc)
 			for (preg in 0:1)
 				prIC[[lac+1,dfc+1,preg+1]] <- this$probInvol(dfc,lac,(preg==1))
+	cat("Built matrix to store probabilities for IC.\n")
 
 	# calc array prPregT. pr of positive pregnancy test (prPreg[lac+1][dfc+1] = pr preg in lac and dfc).
 	# note i C++ we have R array prPreg[[lac+1,dfc+1]] = prPreg[lac][dfc]
@@ -2354,15 +2363,18 @@ setMethodS3("createObjectC", "HMDPDaily", function(this, prefix="", saveCsv=FALS
 	for (lac in 1:this$maxLac)
 		for (dfc in 1:(this$oOestus$insemFinish+this$oOestus$pregTestLth))
 			prPregT[[lac+1,dfc+1]] = this$oOestus$probPregTest(lac, dfc)
+	cat("Built matrix to store probabilities for positive pregnancy test.\n")
 
 	# calc vector vA2M which assign iA to iM (stored in vA2M[iA+1])
 	vA2M<-rep(-1,this$stateVar$sizeA)
 	for (i in 1:this$stateVar$sizeA) vA2M[i] <- this$.mapM1ToM(this$stateVar$sA[i,'center'])
+	cat("Built matrix to store map between A to M.\n")
 
 	binNames<-c("stateIdx.bin","stateIdxLbl.bin","actionIdx.bin",
 		"actionIdxLbl.bin","actionWeight.bin","actionWeightLbl.bin","transProb.bin")
 	binNames<-paste(prefix,binNames,sep="")
 
+	cat("Start building object in memory ... ")
 	this$ptr<-.Call("DAIRY_newDairyModelDaily",
 		binNames,
 		as.integer(this$oOestus$dryPeriodLth),
@@ -2390,8 +2402,9 @@ setMethodS3("createObjectC", "HMDPDaily", function(this, prefix="", saveCsv=FALS
 		as.integer(iAZero),
 		this$.deleteDairyModelDaily
 	)
+	cat("finished.\n")
 
-	cat("\nObject created.\n")
+	cat("Object created.\n")
 	print(proc.time() - ptm)
 
 	invisible()
@@ -2399,12 +2412,12 @@ setMethodS3("createObjectC", "HMDPDaily", function(this, prefix="", saveCsv=FALS
 
 
 #########################################################################/**
-# @RdocMethod genStatesBinaryC
+# @RdocMethod .genStatesBinaryC
 #
 # @title "Generate the binary files describing the states in the HMDP model using C++ code"
 #
 # \description{
-#   @get "title"
+#   @get "title". Internal method use only if you know what you are doing.
 # }
 #
 # @synopsis
@@ -2425,7 +2438,7 @@ setMethodS3("createObjectC", "HMDPDaily", function(this, prefix="", saveCsv=FALS
 # @examples "../RdocFiles/HMDPDaily.Rex"
 #
 #*/#########################################################################
-setMethodS3("genStatesBinaryC", "HMDPDaily", function(this, ...) {
+setMethodS3(".genStatesBinaryC", "HMDPDaily", function(this, ...) {
 	if (is.null(this$ptr)) stop("The object have not been created in memory.")
 	ptm <- proc.time()
 	.Call("DAIRY_genStates",this$ptr)
@@ -2436,9 +2449,44 @@ setMethodS3("genStatesBinaryC", "HMDPDaily", function(this, ...) {
 
 
 #########################################################################/**
-# @RdocMethod genActionsBinaryC
+# @RdocMethod .genActionsBinaryC
 #
 # @title "Generate the binary files describing the actions in the HMDP model using C++ code"
+#
+# \description{
+#   @get "title". Internal method use only if you know what you are doing.
+# }
+#
+# @synopsis
+#
+# \arguments{
+#  \item{prefix}{A character string with the prefix added to the binary files. Used to identify a specific model.}
+#  \item{...}{Arguments passed to \code{calcPrM} and \code{csvPrM}.}
+# }
+#
+# @author
+#
+# \seealso{
+#   @seeclass
+# }
+#
+# @examples "../RdocFiles/HMDPDaily.Rex"
+#
+#*/#########################################################################
+setMethodS3(".genActionsBinaryC", "HMDPDaily", function(this, ...) {
+	if (is.null(this$ptr)) stop("The object have not been created in memory.")
+	ptm <- proc.time()
+	.Call("DAIRY_genActions",this$ptr)
+	cat("\nBinary files for actions created.\n")
+	print(proc.time() - ptm)
+	invisible()
+})
+
+
+#########################################################################/**
+# @RdocMethod genBinaryC
+#
+# @title "Generate the binary files describing the HMDP model using C++ code"
 #
 # \description{
 #   @get "title"
@@ -2460,11 +2508,11 @@ setMethodS3("genStatesBinaryC", "HMDPDaily", function(this, ...) {
 # @examples "../RdocFiles/HMDPDaily.Rex"
 #
 #*/#########################################################################
-setMethodS3("genActionsBinaryC", "HMDPDaily", function(this, ...) {
-	if (is.null(this$ptr)) stop("The object have not been created in memory.")
-	ptm <- proc.time()
-	.Call("DAIRY_genActions",this$ptr)
-	cat("\nBinary files for actions created.\n")
-	print(proc.time() - ptm)
+setMethodS3("genBinaryC", "HMDPDaily", function(this, prefix, ...) {
+	mod$.createObjectC(prefix)
+	mod$.genStatesBinaryC()
+	mod$.genActionsBinaryC()
+	mod$.deleteDairyModelDaily(this$ptr)
+	mod$ptr<-NULL
 	invisible()
 })

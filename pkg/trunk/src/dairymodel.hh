@@ -128,7 +128,9 @@ public:
         return p;
     }*/
 
-    ~DairyModelDaily() {}
+    ~DairyModelDaily() {
+        Rprintf("Deconstructor for DairyModelDaily called\n");
+    }
 
     /** Generate all binary state files for the model */
     void GenerateStatesBinary();

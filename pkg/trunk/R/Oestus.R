@@ -58,7 +58,7 @@ setConstructorS3("Oestus", function(gestLth=282, insemStart=35, insemFinish=250,
 #########################################################################/**
 # @RdocMethod probPregTest
 #
-# @title "Marginal probability of positive pregnancy test "
+# @title "Marginal probability of positive pregnancy test"
 #
 # \description{
 #   @get "title"

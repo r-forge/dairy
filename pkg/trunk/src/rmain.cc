@@ -257,11 +257,16 @@ SEXP DAIRY_newDairyModelDaily(SEXP rBinNames,
 SEXP DAIRY_deleteDairyModelDaily(SEXP s)
 {
     CHECK_PTR(s);
+    cout << "test -1\n" << flush;
     DairyModelDailyPtr p = (DairyModelDailyPtr)R_ExternalPtrAddr(s);
     if (p != NULL) {
+        cout << "test 0\n" << flush;
         delete p;
+        cout << "test 1\n" << flush;
         R_ClearExternalPtr(s);
+        cout << "test 2\n" << flush;
     }
+    cout << "test 3\n" << flush;
     return R_NilValue;
 }
 
