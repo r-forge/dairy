@@ -118,7 +118,7 @@ void DairyModelDaily::SetVS2(intPtr p, int size) {
     //Rprintf("sizeM:%d\n",sizeM);
     // set size of sIdS2
     sIdS2.resize(maxLac+1);
-    for (int d1=1; d1<maxLac+1; ++d1) sIdS2[d1].resize(sizeM);
+    for (int d1=1; d1<maxLac+1; ++d1) sIdS2[d1].resize(sizeM+1);
     /*Rprintf("vS2: ");
     for (int i=0;i<vS2.size();++i) Rprintf("i,n = %d,%d,  ",i,vS2[i]);
     Rprintf("\n");*/
